@@ -11,7 +11,5 @@ export class AppComponent implements OnInit {
   title = 'demo1';
 
   ngOnInit(): void {
-    chartAreaDemo();
-    chartPieDemo();
   }
 }
