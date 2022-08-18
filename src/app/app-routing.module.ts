@@ -6,6 +6,7 @@ import { Page2Component } from './page2/page2.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -31,10 +32,11 @@ const routes: Routes = [
       },
       {
         path: 'pages',
+        canActivate: [AuthGuard],
         loadChildren: () =>
           import('./pages/pages.module').then((m) => m.PagesModule),
       },
-    ]
+    ],
   },
   // { path: '**', pathMatch: 'full', redirectTo: 'dashboard' },
 ];
@@ -43,7 +45,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, {
       useHash: true,
-      preloadingStrategy: PreloadAllModules
+      preloadingStrategy: PreloadAllModules,
     }),
   ],
   exports: [RouterModule],
