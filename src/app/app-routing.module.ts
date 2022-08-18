@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, title: '儀錶板' },
   // { path: 'utils/colors', component: ColorsComponent, title: '工具 / 顏色' },
   { path: 'utils', children: [
-    { path: 'colors', component: ColorsComponent, title: '工具 / 顏色' },
+    { path: 'colors', pathMatch: 'full', redirectTo: 'colors/123' },
+    { path: 'colors/:type', component: ColorsComponent, title: '工具 / 顏色' },
   ] },
   // { path: '**', pathMatch: 'full', redirectTo: 'dashboard' },
 ];
