@@ -13,6 +13,17 @@
                   <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                 </div>
                 <pre>data = {{ data | json }}
+form.value = {{ form.value | json }}
+form.valid = {{ form.valid }}
+form.invalid = {{ form.invalid }}
+form.touched = {{ form.touched }}
+form.untouched = {{ form.untouched }}
+form.pristine = {{ form.pristine }}
+form.dirty = {{ form.dirty }}
+form.enabled = {{ form.enabled }}
+form.disabled = {{ form.disabled }}
+form.errors = {{ form.errors | json }}
+
 mEmail.value = {{ mEmail.value }}
 mEmail.valid = {{ mEmail.valid }}
 mEmail.invalid = {{ mEmail.invalid }}
@@ -23,7 +34,7 @@ mEmail.dirty = {{ mEmail.dirty }}
 mEmail.enabled = {{ mEmail.enabled }}
 mEmail.disabled = {{ mEmail.disabled }}
 mEmail.errors = {{ mEmail.errors | json }}</pre>
-                <form class="user">
+                <form class="user" #form="ngForm" (ngSubmit)="login(form)">
                   <div class="form-group">
                     <input
                       type="email"
@@ -70,12 +81,11 @@ mEmail.errors = {{ mEmail.errors | json }}</pre>
                       >
                     </div>
                   </div>
-                  <a
-                    href="index.html"
+                  <button type="submit" [disabled]="form.invalid"
                     class="btn btn-primary btn-user btn-block"
                   >
                     Login
-                  </a>
+                  </button>
                   <hr />
                   <a
                     href="index.html"
