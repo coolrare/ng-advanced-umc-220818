@@ -61,26 +61,34 @@ export class Login2Component implements OnInit {
     this.form = this.fb.group({
       email: this.fb.control('', {
         validators: [MyRequired('請填寫 E-mail 地址'), MyEmail()],
-        asyncValidators: [ValidateDupEmail]
+        asyncValidators: [ValidateDupEmail],
+        updateOn: 'blur'
       }),
       password: this.fb.control('', {
         validators: [MyRequired(), Validators.minLength(6), Validators.maxLength(32)]
       }),
       remember: this.fb.control(true, {}),
-      home_address: this.fb.group({
-        city: this.fb.control('Taipei', {
-          validators: [MyRequired()]
-        }),
-        district: this.fb.control('中山區', {
-          validators: [MyRequired()]
-        })
-      })
+      home_address: this.fb.array([
+        this.createHomeAddress(),
+        this.createHomeAddress()
+      ])
     });
 
     this.form.reset(this.data);
     // this.form.setValue(this.data);
     // this.form.patchValue(this.data);
 
+  }
+
+  createHomeAddress() {
+    return this.fb.group({
+      city: this.fb.control('Taipei', {
+        validators: [MyRequired()]
+      }),
+      district: this.fb.control('中山區', {
+        validators: [MyRequired()]
+      })
+    });
   }
 
   resetForm() {
@@ -97,6 +105,10 @@ export class Login2Component implements OnInit {
 
   fa(name: string) {
     return this.form.get(name) as FormArray;
+  }
+
+  addNewHomeAddress() {
+    this.fa('home_address').push(this.createHomeAddress());
   }
 
   ngOnDestroy(): void {

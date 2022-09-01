@@ -25,19 +25,25 @@ form.enabled = {{ form.enabled }}
 form.disabled = {{ form.disabled }}
 form.errors = {{ form.errors | json }}
 
-fc('email').value = {{ fc('email').value }}
-fc('email').valid = {{ fc('email').valid }}
-fc('email').invalid = {{ fc('email').invalid }}
-fc('email').touched = {{ fc('email').touched }}
-fc('email').untouched = {{ fc('email').untouched }}
-fc('email').pristine = {{ fc('email').pristine }}
-fc('email').dirty = {{ fc('email').dirty }}
-fc('email').enabled = {{ fc('email').enabled }}
-fc('email').disabled = {{ fc('email').disabled }}
-fc('email').status = {{ fc('email').status }}
-fc('email').errors = {{ fc('email').errors | json }}
-</pre>
-                <form class="user" [formGroup]="form" #f="ngForm" (ngSubmit)="login(f)">
+fc('email').value = {{ fc("email").value }}
+fc('email').valid = {{ fc("email").valid }}
+fc('email').invalid = {{ fc("email").invalid }}
+fc('email').touched = {{ fc("email").touched }}
+fc('email').untouched = {{ fc("email").untouched }}
+fc('email').pristine = {{ fc("email").pristine }}
+fc('email').dirty = {{ fc("email").dirty }}
+fc('email').enabled = {{ fc("email").enabled }}
+fc('email').disabled = {{ fc("email").disabled }}
+fc('email').status = {{ fc("email").status }}
+fc('email').errors = {{ fc("email").errors | json }}
+</pre
+                >
+                <form
+                  class="user"
+                  [formGroup]="form"
+                  #f="ngForm"
+                  (ngSubmit)="login(f)"
+                >
                   <div class="form-group">
                     <input
                       type="email"
@@ -49,12 +55,16 @@ fc('email').errors = {{ fc('email').errors | json }}
                     />
                     <div
                       class="text-danger"
-                      *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
+                      *ngIf="
+                        form.get('email')?.touched && form.get('email')?.invalid
+                      "
                     >
-                      <span *ngIf="form.get('email')?.errors?.['required']"
+                      <span
+                        *ngIf="form.get('email')?.errors?.['required']"
                         >{{form.get('email')?.errors?.['required']}}</span
                       >
-                      <span *ngIf="form.get('email')?.errors?.['email']"
+                      <span
+                        *ngIf="form.get('email')?.errors?.['email']"
                         >{{form.get('email')?.errors?.['email']}}</span
                       >
                     </div>
@@ -81,27 +91,37 @@ fc('email').errors = {{ fc('email').errors | json }}
                       >
                     </div>
                   </div>
-                  <div
-                    formGroupName="home_address"
-                    [class.invalid-div]="fg('home_address').invalid"
-                  >
-                    <div class="form-group">
-                      <input
-                        type="text"
-                        class="form-control form-control-user"
-                        placeholder="居住縣市"
-                        formControlName="city"
-                      />
-                    </div>
-                    <div class="form-group">
-                      <input
-                        type="text"
-                        class="form-control form-control-user"
-                        placeholder="居住鄉鎮市區"
-                        formControlName="district"
-                      />
+
+                  <div formArrayName="home_address">
+                    <div *ngFor="let group of fa('home_address').controls; let i=index" [formGroupName]="i">
+                      <div class="form-group">
+                        {{ i + 1}}
+                      </div>
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          class="form-control form-control-user"
+                          placeholder="居住縣市"
+                          formControlName="city"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          class="form-control form-control-user"
+                          placeholder="居住鄉鎮市區"
+                          formControlName="district"
+                        />
+                      </div>
                     </div>
                   </div>
+
+                  <button
+                    type="button" (click)="addNewHomeAddress()"
+                    class="btn btn-primary btn-user btn-block"
+                  >
+                    + 1
+                  </button>
 
                   <button
                     type="submit"
@@ -111,7 +131,8 @@ fc('email').errors = {{ fc('email').errors | json }}
                   </button>
                   <hr />
                   <button
-                    type="button" (click)="resetForm()"
+                    type="button"
+                    (click)="resetForm()"
                     class="btn btn-google btn-user btn-block"
                   >
                     Reset Form
