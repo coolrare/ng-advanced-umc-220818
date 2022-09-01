@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroupDirective, NgForm, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -15,17 +15,30 @@ export class Login2Component implements OnInit {
     remember: true
   };
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  form!: UntypedFormGroup;
+
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     document.body.className = 'bg-gradient-primary';
+
+    this.form = this.fb.group({
+      email: this.fb.control('', {
+        validators: [Validators.required, Validators.email]
+      }),
+      password: this.fb.control('123123', {
+        validators: [Validators.required, Validators.minLength(6), Validators.maxLength(32)]
+      }),
+      remember: this.fb.control(true, {})
+    });
+
   }
 
   ngOnDestroy(): void {
     document.body.className = '';
   }
 
-  login(form: NgForm) {
+  login(form: FormGroupDirective) {
     if (form.valid) {
       console.log('送出表單資料: ' + JSON.stringify(this.data));
       // this.http.post('/login', this.data).subscribe(() => {
