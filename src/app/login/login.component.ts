@@ -6,6 +6,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
+  data: any = {
+    email: '',
+    password: '123123',
+    remember: true
+  };
+
   constructor() { }
 
   ngOnInit(): void {
