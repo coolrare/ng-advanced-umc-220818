@@ -34,6 +34,7 @@ fc('email').pristine = {{ fc('email').pristine }}
 fc('email').dirty = {{ fc('email').dirty }}
 fc('email').enabled = {{ fc('email').enabled }}
 fc('email').disabled = {{ fc('email').disabled }}
+fc('email').status = {{ fc('email').status }}
 fc('email').errors = {{ fc('email').errors | json }}
 </pre>
                 <form class="user" [formGroup]="form" #f="ngForm" (ngSubmit)="login(f)">

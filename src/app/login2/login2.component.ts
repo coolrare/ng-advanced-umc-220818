@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
@@ -24,6 +25,19 @@ function MyEmail(errMsg: string = '請填寫合法的 E-mail 格式') {
 
 }
 
+function ValidateDupEmail(c: AbstractControl) : Observable<ValidationErrors | null> | Promise<ValidationErrors | null> {
+  return new Promise<ValidationErrors | null>(resolve => {
+    setTimeout(() => {
+      if (c.value === 'doggy.huang@gmail.com') {
+        resolve({ dup: true });
+      } else {
+        resolve(null);
+      }
+    }, 3000);
+  });
+}
+
+
 
 @Component({
   templateUrl: './login2.component.html',
@@ -46,7 +60,8 @@ export class Login2Component implements OnInit {
 
     this.form = this.fb.group({
       email: this.fb.control('', {
-        validators: [MyRequired('請填寫 E-mail 地址'), MyEmail()]
+        validators: [MyRequired('請填寫 E-mail 地址'), MyEmail()],
+        asyncValidators: [ValidateDupEmail]
       }),
       password: this.fb.control('', {
         validators: [MyRequired(), Validators.minLength(6), Validators.maxLength(32)]
@@ -94,6 +109,10 @@ export class Login2Component implements OnInit {
       // this.http.post('/login', this.data).subscribe(() => {
       //   this.router.navigateByUrl(this.route.snapshot.queryParamMap.get('returnUrl') || '/');
       // });
+    }
+
+    if (form.invalid) {
+      // INVALID
     }
   }
 
