@@ -12,7 +12,8 @@
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                 </div>
-                <pre>data = {{ data | json }}
+                <pre>
+data = {{ data | json }}
 form.value = {{ form.value | json }}
 form.valid = {{ form.valid }}
 form.invalid = {{ form.invalid }}
@@ -33,7 +34,8 @@ mEmail.pristine = {{ mEmail.pristine }}
 mEmail.dirty = {{ mEmail.dirty }}
 mEmail.enabled = {{ mEmail.enabled }}
 mEmail.disabled = {{ mEmail.disabled }}
-mEmail.errors = {{ mEmail.errors | json }}</pre>
+mEmail.errors = {{ mEmail.errors | json }}</pre
+                >
                 <form class="user" #form="ngForm" (ngSubmit)="login(form)">
                   <div class="form-group">
                     <input
@@ -45,11 +47,19 @@ mEmail.errors = {{ mEmail.errors | json }}</pre>
                       [(ngModel)]="data.email"
                       #mEmail="ngModel"
                       name="email"
-                      required email
+                      required
+                      email
                     />
-                    <div class="text-danger" *ngIf="mEmail.touched && mEmail.invalid">
-                      <span *ngIf="mEmail.errors?.['required']">Email is required</span>
-                      <span *ngIf="mEmail.errors?.['email']">Email is not valid</span>
+                    <div
+                      class="text-danger"
+                      *ngIf="mEmail.touched && mEmail.invalid"
+                    >
+                      <span *ngIf="mEmail.errors?.['required']"
+                        >Email is required</span
+                      >
+                      <span *ngIf="mEmail.errors?.['email']"
+                        >Email is not valid</span
+                      >
                     </div>
                   </div>
                   <div class="form-group">
@@ -81,7 +91,38 @@ mEmail.errors = {{ mEmail.errors | json }}</pre>
                       >
                     </div>
                   </div>
-                  <button type="submit" [disabled]="form.invalid"
+                  <div
+                    ngModelGroup="home_address"
+                    #mHomeAddress="ngModelGroup"
+                    [class.invalid-div]="mHomeAddress.invalid"
+                  >
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control form-control-user"
+                        placeholder="居住縣市"
+                        [(ngModel)]="data.city"
+                        #mPassword="ngModel"
+                        name="city"
+                        required
+                      />
+                    </div>
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control form-control-user"
+                        placeholder="居住鄉鎮市區"
+                        [(ngModel)]="data.district"
+                        #mPassword="ngModel"
+                        name="district"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    [disabled]="form.invalid"
                     class="btn btn-primary btn-user btn-block"
                   >
                     Login
