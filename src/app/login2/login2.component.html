@@ -69,20 +69,15 @@ form.errors = {{ form.errors | json }}
                       >
                     </div>
                   </div>
-                  <!-- <div
-                    ngModelGroup="home_address"
-                    #mHomeAddress="ngModelGroup"
-                    [class.invalid-div]="mHomeAddress.invalid"
+                  <div
+                    formGroupName="home_address"
                   >
                     <div class="form-group">
                       <input
                         type="text"
                         class="form-control form-control-user"
                         placeholder="居住縣市"
-                        [(ngModel)]="data.city"
-                        #mPassword="ngModel"
-                        name="city"
-                        required
+                        formControlName="city"
                       />
                     </div>
                     <div class="form-group">
@@ -90,13 +85,10 @@ form.errors = {{ form.errors | json }}
                         type="text"
                         class="form-control form-control-user"
                         placeholder="居住鄉鎮市區"
-                        [(ngModel)]="data.district"
-                        #mPassword="ngModel"
-                        name="district"
-                        required
+                        formControlName="district"
                       />
                     </div>
-                  </div> -->
+                  </div>
 
                   <button
                     type="submit"

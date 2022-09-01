@@ -29,7 +29,15 @@ export class Login2Component implements OnInit {
       password: this.fb.control('123123', {
         validators: [Validators.required, Validators.minLength(6), Validators.maxLength(32)]
       }),
-      remember: this.fb.control(true, {})
+      remember: this.fb.control(true, {}),
+      home_address: this.fb.group({
+        city: this.fb.control('', {
+          validators: [Validators.required]
+        }),
+        district: this.fb.control('', {
+          validators: [Validators.required]
+        })
+      })
     });
 
   }
