@@ -54,7 +54,7 @@ fc('email').errors = {{ fc('email').errors | json }}
                         >{{form.get('email')?.errors?.['required']}}</span
                       >
                       <span *ngIf="form.get('email')?.errors?.['email']"
-                        >Email is not valid</span
+                        >{{form.get('email')?.errors?.['email']}}</span
                       >
                     </div>
                   </div>
