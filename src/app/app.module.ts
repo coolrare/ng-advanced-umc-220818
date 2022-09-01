@@ -12,6 +12,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Login2Component } from './login2/login2.component';
+import { TwidValidatorDirective } from './twid-validator.directive';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { Login2Component } from './login2/login2.component';
     ColorsComponent,
     LoginComponent,
     LayoutComponent,
-    Login2Component
+    Login2Component,
+    TwidValidatorDirective
   ],
   imports: [
     BrowserModule,
