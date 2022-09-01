@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroupDirective, NgForm, UntypedFormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+
+function MyRequired(c: AbstractControl) : ValidationErrors | null {
+  return (c.value) ? null : { required: `此欄位必填` };
+}
 
 @Component({
   templateUrl: './login2.component.html',
@@ -24,18 +28,18 @@ export class Login2Component implements OnInit {
 
     this.form = this.fb.group({
       email: this.fb.control('', {
-        validators: [Validators.required, Validators.email]
+        validators: [MyRequired, Validators.email]
       }),
       password: this.fb.control('', {
-        validators: [Validators.required, Validators.minLength(6), Validators.maxLength(32)]
+        validators: [MyRequired, Validators.minLength(6), Validators.maxLength(32)]
       }),
       remember: this.fb.control(true, {}),
       home_address: this.fb.group({
         city: this.fb.control('Taipei', {
-          validators: [Validators.required]
+          validators: [MyRequired]
         }),
         district: this.fb.control('中山區', {
-          validators: [Validators.required]
+          validators: [MyRequired]
         })
       })
     });
@@ -48,6 +52,18 @@ export class Login2Component implements OnInit {
 
   resetForm() {
     this.form.reset(this.data);
+  }
+
+  fc(name: string) {
+    return this.form.get(name) as FormControl;
+  }
+
+  fg(name: string) {
+    return this.form.get(name) as FormGroup;
+  }
+
+  fa(name: string) {
+    return this.form.get(name) as FormArray;
   }
 
   ngOnDestroy(): void {

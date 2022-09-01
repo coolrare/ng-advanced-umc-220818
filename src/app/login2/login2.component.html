@@ -25,16 +25,16 @@ form.enabled = {{ form.enabled }}
 form.disabled = {{ form.disabled }}
 form.errors = {{ form.errors | json }}
 
-form.get('email')?.value = {{ form.get('email')?.value }}
-form.get('email')?.valid = {{ form.get('email')?.valid }}
-form.get('email')?.invalid = {{ form.get('email')?.invalid }}
-form.get('email')?.touched = {{ form.get('email')?.touched }}
-form.get('email')?.untouched = {{ form.get('email')?.untouched }}
-form.get('email')?.pristine = {{ form.get('email')?.pristine }}
-form.get('email')?.dirty = {{ form.get('email')?.dirty }}
-form.get('email')?.enabled = {{ form.get('email')?.enabled }}
-form.get('email')?.disabled = {{ form.get('email')?.disabled }}
-form.get('email')?.errors = {{ form.get('email')?.errors | json }}
+fc('email').value = {{ fc('email').value }}
+fc('email').valid = {{ fc('email').valid }}
+fc('email').invalid = {{ fc('email').invalid }}
+fc('email').touched = {{ fc('email').touched }}
+fc('email').untouched = {{ fc('email').untouched }}
+fc('email').pristine = {{ fc('email').pristine }}
+fc('email').dirty = {{ fc('email').dirty }}
+fc('email').enabled = {{ fc('email').enabled }}
+fc('email').disabled = {{ fc('email').disabled }}
+fc('email').errors = {{ fc('email').errors | json }}
 </pre>
                 <form class="user" [formGroup]="form" #f="ngForm" (ngSubmit)="login(f)">
                   <div class="form-group">
@@ -51,7 +51,7 @@ form.get('email')?.errors = {{ form.get('email')?.errors | json }}
                       *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
                     >
                       <span *ngIf="form.get('email')?.errors?.['required']"
-                        >Email is required</span
+                        >{{form.get('email')?.errors?.['required']}}</span
                       >
                       <span *ngIf="form.get('email')?.errors?.['email']"
                         >Email is not valid</span
@@ -82,7 +82,7 @@ form.get('email')?.errors = {{ form.get('email')?.errors | json }}
                   </div>
                   <div
                     formGroupName="home_address"
-                    [class.invalid-div]="form.get('home_address')?.invalid"
+                    [class.invalid-div]="fg('home_address').invalid"
                   >
                     <div class="form-group">
                       <input
