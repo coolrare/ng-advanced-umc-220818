@@ -24,6 +24,17 @@ form.dirty = {{ form.dirty }}
 form.enabled = {{ form.enabled }}
 form.disabled = {{ form.disabled }}
 form.errors = {{ form.errors | json }}
+
+form.get('email')?.value = {{ form.get('email')?.value }}
+form.get('email')?.valid = {{ form.get('email')?.valid }}
+form.get('email')?.invalid = {{ form.get('email')?.invalid }}
+form.get('email')?.touched = {{ form.get('email')?.touched }}
+form.get('email')?.untouched = {{ form.get('email')?.untouched }}
+form.get('email')?.pristine = {{ form.get('email')?.pristine }}
+form.get('email')?.dirty = {{ form.get('email')?.dirty }}
+form.get('email')?.enabled = {{ form.get('email')?.enabled }}
+form.get('email')?.disabled = {{ form.get('email')?.disabled }}
+form.get('email')?.errors = {{ form.get('email')?.errors | json }}
 </pre>
                 <form class="user" [formGroup]="form" #f="ngForm" (ngSubmit)="login(f)">
                   <div class="form-group">
@@ -35,17 +46,17 @@ form.errors = {{ form.errors | json }}
                       placeholder="Enter Email Address..."
                       formControlName="email"
                     />
-                    <!-- <div
+                    <div
                       class="text-danger"
-                      *ngIf="mEmail.touched && mEmail.invalid"
+                      *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
                     >
-                      <span *ngIf="mEmail.errors?.['required']"
+                      <span *ngIf="form.get('email')?.errors?.['required']"
                         >Email is required</span
                       >
-                      <span *ngIf="mEmail.errors?.['email']"
+                      <span *ngIf="form.get('email')?.errors?.['email']"
                         >Email is not valid</span
                       >
-                    </div> -->
+                    </div>
                   </div>
                   <div class="form-group">
                     <input
@@ -71,6 +82,7 @@ form.errors = {{ form.errors | json }}
                   </div>
                   <div
                     formGroupName="home_address"
+                    [class.invalid-div]="form.get('home_address')?.invalid"
                   >
                     <div class="form-group">
                       <input
