@@ -109,12 +109,12 @@ form.get('email')?.errors = {{ form.get('email')?.errors | json }}
                     Login
                   </button>
                   <hr />
-                  <a
-                    href="index.html"
+                  <button
+                    type="button" (click)="resetForm()"
                     class="btn btn-google btn-user btn-block"
                   >
-                    <i class="fab fa-google fa-fw"></i> Login with Google
-                  </a>
+                    Reset Form
+                  </button>
                   <a
                     href="index.html"
                     class="btn btn-facebook btn-user btn-block"

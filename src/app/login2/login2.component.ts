@@ -10,9 +10,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class Login2Component implements OnInit {
 
   data: any = {
-    email: '',
+    email: 'doggy.huang@gmail.com',
     password: '123123',
-    remember: true
+    remember: false
   };
 
   form!: UntypedFormGroup;
@@ -26,20 +26,28 @@ export class Login2Component implements OnInit {
       email: this.fb.control('', {
         validators: [Validators.required, Validators.email]
       }),
-      password: this.fb.control('123123', {
+      password: this.fb.control('', {
         validators: [Validators.required, Validators.minLength(6), Validators.maxLength(32)]
       }),
       remember: this.fb.control(true, {}),
       home_address: this.fb.group({
-        city: this.fb.control('', {
+        city: this.fb.control('Taipei', {
           validators: [Validators.required]
         }),
-        district: this.fb.control('', {
+        district: this.fb.control('中山區', {
           validators: [Validators.required]
         })
       })
     });
 
+    this.form.reset(this.data);
+    // this.form.setValue(this.data);
+    // this.form.patchValue(this.data);
+
+  }
+
+  resetForm() {
+    this.form.reset(this.data);
   }
 
   ngOnDestroy(): void {
